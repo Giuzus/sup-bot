@@ -1,0 +1,16 @@
+{
+  "name": "sup-bot",
+  "version": "1.0.0",
+  "description": "",
+  "main": "sup-bot.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "discord.js": "^11.3.0",
+    "iterate-js": "^1.1.0",
+    "moment": "^2.20.1"
+  }
+}
