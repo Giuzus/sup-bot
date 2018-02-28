@@ -12,8 +12,5 @@ module.exports = __.class(function(cfg) {
     },
     disconnect: function() {
         return this.client.destroy();
-    },
-    listen: function() {
-        this.console.listen();
     }
 });

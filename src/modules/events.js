@@ -33,21 +33,14 @@ module.exports = function(bot) {
                     logger.error(e);
                 }
             }
-            try {
-                bot.manager.clean();
-            } catch(e) {
-                logger.error(e);
-            }
         },
 
         ready: () => {
-            bot.clock.start();
             if(bot.online)
                 logger.log('Reconnected.');
             else
-                logger.log('Rhythm Bot Online.');
+                logger.log('SupBot Online.');
             bot.online = true;
-            bot.manager.clean();
         },
 
         reconnecting: () => {

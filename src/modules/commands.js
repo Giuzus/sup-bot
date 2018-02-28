@@ -18,9 +18,12 @@ module.exports = function(bot) {
             var random = (array) => {
                 return array[Math.floor(Math.random() * array.length)];
             };
-            if(msg.guild)
-                phrases = phrases.concat(msg.guild.emojis.array());
-            msg.channel.sendMessage(random(phrases));
+            msg.channel.send(random(phrases));
+        },
+
+        kenzo: msg => {
+
+            msg.channel.send("Viado <:lul:252554070601105409>")
         }
 
     };
