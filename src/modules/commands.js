@@ -12,7 +12,6 @@ module.exports = function(bot) {
 
         ping: msg => {
             var phrases = [ 
-                `Can't stop won't stop!`, 
                 `:ping_pong: Pong Bitch!` 
             ];
             var random = (array) => {
@@ -23,7 +22,7 @@ module.exports = function(bot) {
 
         kenzo: msg => {
 
-            msg.channel.send("Viado <:lul:252554070601105409>")
+            msg.channel.send("Viado")
         }
 
     };

@@ -1,3 +1,4 @@
+const config = require('../config/config');
 const __ = require('iterate-js');
 
 module.exports = function (bot, config) {
@@ -6,7 +7,7 @@ module.exports = function (bot, config) {
             symbol: '-'
         }),
         discord: new __.lib.Config({
-            token: 'NDE3MTMxNzk3MjE0OTIwNzE0.DXZSJA.cakgt6cy0jClGzQkxfwvIS8W2aU',
+            token: config.discord.token,
             log: true,
             manage: new __.lib.Config({
                 channels: []
