@@ -1,13 +1,15 @@
-const config = require('../config/config');
+const configJson = require('../config/config.json');
 const __ = require('iterate-js');
 
 module.exports = function (bot, config) {
+
+
     bot.config = new __.lib.Config({
         command: new __.lib.Config({
-            symbol: '-'
+            symbol: '!'
         }),
         discord: new __.lib.Config({
-            token: config.discord.token,
+            token: configJson.discord.token,
             log: true,
             manage: new __.lib.Config({
                 channels: []

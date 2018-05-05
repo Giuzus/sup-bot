@@ -18,12 +18,6 @@ module.exports = function(bot) {
                 return array[Math.floor(Math.random() * array.length)];
             };
             msg.channel.send(random(phrases));
-        },
-
-        kenzo: msg => {
-
-            msg.channel.send("Viado")
         }
-
     };
 };

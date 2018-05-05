@@ -34,7 +34,7 @@ module.exports = function(bot) {
                 }
             }
         },
-
+        
         ready: () => {
             if(bot.online)
                 logger.log('Reconnected.');
@@ -48,7 +48,7 @@ module.exports = function(bot) {
         },
 
         disconnect: () => {
-            bot.clock.stop();
+            // bot.clock.stop();
             bot.online = false;
             logger.log('Disconnected.');
         },
@@ -57,32 +57,6 @@ module.exports = function(bot) {
             logger.error(error);
         },
 
-        guildMemberUpdate: (old, member) => {
-            if(member.user.username == bot.client.user.username && member.mute) {
-                member.setMute(false);
-                logger.log('Bot muted....unmuteing');
-            }
-        },
-
-        guildMemberSpeaking: (member, isSpeaking) => {
-            if(isSpeaking)
-                bot.speakers.push(member.id);
-            else {
-                var idx = bot.speakers.indexOf(member.id);
-                if(idx > -1)
-                    bot.speakers.splice(idx, 1);
-            }
-
-            if(bot.config.auto.deafen) {
-                var track = bot.queue.first;
-                if(track && track.dispatcher) {
-                    if(bot.speakers.length > 0)
-                        track.dispatcher.setVolume(0.5);
-                    else
-                        track.dispatcher.setVolume(bot.config.stream.volume);
-                }
-            }
-        }
 
     }, (func, name) => { bot.client.on(name, func); });
 };
