@@ -4,13 +4,7 @@ const __ = require('iterate-js');
 
 
 module.exports = function(bot) {
-    bot.commands = {
-
-        // help: msg => {
-        //     msg.channel.sendMessage(helpText.format(bot.config.command.symbol));
-        // },
-
-        ping: msg => {
+    bot.commands.ping = (msg) => {
             var phrases = [ 
                 `:ping_pong: Pong Bitch!` 
             ];
@@ -18,6 +12,5 @@ module.exports = function(bot) {
                 return array[Math.floor(Math.random() * array.length)];
             };
             msg.channel.send(random(phrases));
-        }
-    };
+        }   
 };

@@ -1,30 +1,31 @@
 const logger = require('../logger.js');
 const __ = require('iterate-js');
 
-// const helpText = require('../helptext.js');
-
 
 module.exports = function (bot) {
 
-    bot.commands = {
-        setplay: (msg) => {
-            setChannel(msg.member, msg.channel);
-        },
-        setwait: (msg) => {
-            setWaitChannel(msg.member, msg.channel);
-        },
-        join: (msg) => {
-            joinQueue(msg.member, msg.channel);
-        },
-        leave: (msg) => {
-            leaveQueue(msg.member, msg.channel);
-        },
-        next: (msg) => {
-            queueNext(msg.member, msg.channel);
-        },
-        queue: (msg) => {
-            listQueue(msg.channel);
-        }
+    bot.commands.setplay = (msg) => {
+        setChannel(msg.member, msg.channel);
+    }
+
+    bot.commands.setwait = (msg) => {
+        setWaitChannel(msg.member, msg.channel);
+    }
+
+    bot.commands.join = (msg) => {
+        joinQueue(msg.member, msg.channel);
+    }
+
+    bot.commands.leave = (msg) => {
+        leaveQueue(msg.member, msg.channel);
+    }
+
+    bot.commands.next = (msg) => {
+        queueNext(msg.member, msg.channel);
+    }
+
+    bot.commands.queue = (msg) => {
+        listQueue(msg.channel);
     }
 
     bot.client.on('voiceStateUpdate', (oldMember, newMember) => {
@@ -121,8 +122,7 @@ function setWaitChannel(member, textChannel) {
 function listQueue(textChannel) {
     var ret = "**Fila:** ```";
 
-    for(i = 0; i < queue.length; i++)
-    {
+    for (i = 0; i < queue.length; i++) {
         ret += `\n${queue[i].displayName}`;
     }
     ret += "```";
