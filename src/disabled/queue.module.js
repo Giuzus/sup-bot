@@ -1,11 +1,9 @@
 const logger = require('../logger.js');
 const __ = require('iterate-js');
 
-// const helpText = require('../helptext.js');
-
 
 module.exports = function (bot) {
-
+    
     bot.commands = {
         setplay: (msg) => {
             setChannel(msg.member, msg.channel);
@@ -35,10 +33,6 @@ module.exports = function (bot) {
     });
 }
 
-//TODO:
-//comando para listar canais configurados.
-
-//não sei a melhor forma de estruturar, então vai ficar aqui mesmo, sinta-se livre para organizar
 let queue = [];
 let active;
 let playChannel;
@@ -121,8 +115,7 @@ function setWaitChannel(member, textChannel) {
 function listQueue(textChannel) {
     var ret = "**Fila:** ```";
 
-    for(i = 0; i < queue.length; i++)
-    {
+    for (i = 0; i < queue.length; i++) {
         ret += `\n${queue[i].displayName}`;
     }
     ret += "```";

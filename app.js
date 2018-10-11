@@ -1,9 +1,12 @@
-const SupBot = require('./src/sup-bot.js');
-
+const SupBot = require('./src/sup-bot');
+const logger = require('./src/logger')
 
 const bot = new SupBot();
 
 bot.connect()
+    .then(() => {
+        console.log("Bot running.")
+    })
     .catch(err => {
-        console.log(err);
+        logger.error(err);
     });

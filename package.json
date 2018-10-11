@@ -10,7 +10,6 @@
   "license": "ISC",
   "dependencies": {
     "discord.js": "^11.3.0",
-    "iterate-js": "^1.1.0",
     "moment": "^2.20.1"
   }
 }

@@ -1,16 +1,46 @@
 "use strict";
 
-const __ = require('iterate-js');
+const fs = require('fs');
+const Discord = require('discord.js');
+const configJson = require('../config/config.json');
 
-const init = require('./load.js');
 
-module.exports = __.class(function(cfg) {
-    init(this, cfg);
-}, {
-    connect: function() {
+class SupBot {
+
+    constructor() {
+        this.init();
+    }
+
+    async connect() {
         return this.client.login(this.config.discord.token);
-    },
-    disconnect: function() {
+    }
+
+    async disconnect() {
         return this.client.destroy();
     }
-});
+
+    init() {
+
+        this.config = {
+            command: {
+                symbol: '-'
+            },
+            discord: {
+                token: configJson.discord.token,
+                log: true
+            }
+        };
+
+        this.dir = __dirname;
+        this.client = new Discord.Client();
+
+        const modules = fs.readdirSync('./src/modules').map(path => require('./modules/' + path));
+
+        modules.forEach(mod => new mod().init(this));
+    };
+
+
+
+}
+
+module.exports = SupBot;
