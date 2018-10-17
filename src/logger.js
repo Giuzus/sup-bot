@@ -1,6 +1,5 @@
 
 const fs = require('fs');
-const __ = require('iterate-js');
 const moment = require('moment');
 
 const logger = {
