@@ -12,7 +12,7 @@ class SupBot {
     }
 
     async connect() {
-        return this.client.login(this.config.discord.token);
+        return this.client.login(process.env.token);
     }
 
     async disconnect() {
