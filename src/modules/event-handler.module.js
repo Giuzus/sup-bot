@@ -4,25 +4,22 @@ const logger = require('../logger.js');
 
 class EventHandler {
 
-    parseMsg(msg) {
+    parseMsg(msg, symbol) {
         msg.meta = msg.content.split(' ');
         var x = msg.meta.slice();
-        msg.cmd = x.shift().replace(bot.config.command.symbol, '');
+        msg.cmd = x.shift().replace(symbol, '');
         msg.details = x.join(' ');
         return msg;
     };
 
-    isCommand(content) {
-        return content.substring(0, bot.config.command.symbol.length) == bot.config.command.symbol;
+    isCommand(content, symbol) {
+        return content.substring(0, symbol.length) == symbol;
     }
 
     init(bot) {
-
-        this.bot = bot;
-
         let events = {
             message: msg => {
-                if (msg.content && this.isCommand(msg.content)) {
+                if (msg.content && this.isCommand(msg.content, bot.config.command.symbol)) {
 
                     if (bot.config.discord.log && msg.author.id != bot.client.user.id) {
                         logger.log('{0}{1}{2} : {3}'.format(
@@ -34,7 +31,7 @@ class EventHandler {
                     }
 
                     try {
-                        var data = this.parseMsg(msg),
+                        var data = this.parseMsg(msg, bot.config.command.symbol),
                             cmd = bot.commands[data.cmd];
                         if (__.is.function(cmd))
                             cmd(data);
