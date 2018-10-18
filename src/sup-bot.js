@@ -11,7 +11,7 @@ class SupBot {
     }
 
     async connect() {
-        return this.client.login("NDE3MTMxNzk3MjE0OTIwNzE0.DqooLA.fxgjymua4d7H5ZoQyz94CM4AT0o");
+        return this.client.login(process.env.token);
     }
 
     async disconnect() {
@@ -31,7 +31,9 @@ class SupBot {
 
         const modules = fs.readdirSync('./src/modules').map(path => require('./modules/' + path));
 
-        modules.forEach(mod => new mod().init(this));
+        modules.forEach(mod => {
+            new mod().init(this)
+        });
     };
 
 

@@ -3,6 +3,7 @@ const logger = require('../logger.js');
 
 
 class EventHandler {
+
     parseMsg(msg) {
         msg.meta = msg.content.split(' ');
         var x = msg.meta.slice();
@@ -16,6 +17,9 @@ class EventHandler {
     }
 
     init(bot) {
+
+        this.bot = bot;
+
         let events = {
             message: msg => {
                 if (msg.content && this.isCommand(msg.content)) {
