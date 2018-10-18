@@ -24,16 +24,18 @@ class EventHandler {
                     if (msg.author.id != bot.client.user.id) {
                         logger.log(
                             msg.guild ? msg.guild.name + ' ' : '' +
-                            msg.channel.name ? '#' + msg.channel.name + ' @' : 'PM @' +
-                            msg.author.username +
-                            ': ' + msg.content);
+                                msg.channel.name ? '#' + msg.channel.name + ' @' : 'PM @' +
+                                msg.author.username +
+                                ': ' + msg.content);
                     }
 
                     try {
-                        var data = this.parseMsg(msg, bot.config.command.symbol),
-                            cmd = bot.commands[data.cmd];
-                        if (__.is.function(cmd))
+                        var data = this.parseMsg(msg, bot.config.command.symbol);
+                        var cmd = bot.commands[data.cmd];
+                        if (typeof cmd === "function") {
                             cmd(data);
+                        }
+                        
                     } catch (e) {
                         logger.error(e);
                     }
