@@ -5,7 +5,7 @@
   "main": "sup-bot.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node app.js"
+    "start": "now rm my-app --safe --yes; node app.js"
   },
   "author": "",
   "license": "ISC",
