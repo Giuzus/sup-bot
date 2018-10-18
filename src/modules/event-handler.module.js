@@ -21,7 +21,7 @@ class EventHandler {
             message: msg => {
                 if (msg.content && this.isCommand(msg.content, bot.config.command.symbol)) {
 
-                    if (bot.config.discord.log && msg.author.id != bot.client.user.id) {
+                    if (msg.author.id != bot.client.user.id) {
                         logger.log('{0}{1}{2} : {3}'.format(
                             msg.guild ? '{0} '.format(msg.guild.name) : '',
                             msg.channel.name ? '#{0} @ '.format(msg.channel.name) : 'PM @ ',
