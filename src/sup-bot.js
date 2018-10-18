@@ -2,7 +2,6 @@
 
 const fs = require('fs');
 const Discord = require('discord.js');
-const configJson = require('../config/config.json');
 
 
 class SupBot {
@@ -24,10 +23,6 @@ class SupBot {
         this.config = {
             command: {
                 symbol: '-'
-            },
-            discord: {
-                token: configJson.discord.token,
-                log: true
             }
         };
 
