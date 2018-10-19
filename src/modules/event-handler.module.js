@@ -108,7 +108,7 @@ class EventHandler {
     }
 
     addCustomCommand(msg) {
-        Commands.findOne({ guild: data.guild, command: data.cmd },
+        Commands.findOne({ guild: msg.guild, command: msg.cmd },
             function (err, command) {
                 if (command) {
                     msg.channel.send("Command already exists.");
@@ -135,7 +135,7 @@ class EventHandler {
     }
 
     removeCustomCommand(msg) {
-        Commands.findOne({ guild: data.guild, command: data.cmd },
+        Commands.findOne({ guild: msg.guild, command: msg.cmd },
             function (err, command) {
                 if (err)
                     throw err;
