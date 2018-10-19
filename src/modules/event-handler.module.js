@@ -99,7 +99,7 @@ class EventHandler {
             function (err, command) {
                 if (command) {
                     console.log("Custom command found")
-                    msg.channel.send(command.response);
+                    data.channel.send(command.response);
                 }
                 else {
                     console.log('No custom command found')
@@ -128,7 +128,7 @@ class EventHandler {
                     });
 
                     command.save(function (err, command) {
-                        msg.channel.send(`Successfully created '${command.cmd}' command.`)
+                        msg.channel.send(`Successfully created '${command.command}' command.`)
                     });
                 }
             });
