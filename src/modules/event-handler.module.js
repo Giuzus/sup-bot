@@ -15,7 +15,7 @@ class EventHandler {
     
                     var data = this.parseMsg(msg, bot.config.command.symbol);
     
-                    bot.executeCommand(data);
+                    this.executeCommand(data);
     
                 }
             },
