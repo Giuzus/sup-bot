@@ -108,15 +108,14 @@ class EventHandler {
     }
 
     addCustomCommand(msg) {
-        Commands.findOne({ guild: msg.guild, command: msg.cmd },
+        var cmd = msg.details.split(" ")[0];
+        var message = msg.details.substring(msg.details.indexOf('"') + 1, msg.details.lastIndexOf('"'));
+        Commands.findOne({ guild: msg.guild, command: cmd },
             function (err, command) {
                 if (command) {
                     msg.channel.send("Command already exists.");
                 }
                 else {
-                    var cmd = msg.details.split(" ")[0];
-                    var message = msg.details.substring(msg.details.indexOf('"') + 1, msg.details.lastIndexOf('"'));
-
                     if (!cmd || !message) {
                         msg.channel.send('Usage: <command-name> "<message>"')
                     }
