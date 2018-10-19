@@ -1,6 +1,7 @@
 {
     "env": {
-        "token": "@token"
+        "token": "@token",
+        "mongo": "@mongo"
     },
     "scale": {
         "sfo1": {

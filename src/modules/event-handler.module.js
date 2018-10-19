@@ -1,10 +1,31 @@
 const logger = require('../logger.js');
+var mongoose = require('mongoose');
 
+var Schema = mongoose.Schema;
+
+var commandSchema = new Schema({
+    guild: {
+        type: String,
+        required: true
+    },
+    command: {
+        type: String,
+        required: true
+    },
+    response: {
+        type: String,
+        required: true
+    }
+});
+
+var Commands = mongoose.model('Commands', commandSchema);
 
 class EventHandler {
 
     init(bot) {
+        bot.commands = {
 
+        }
         const events = {
             message: msg => {
                 if (msg.content && this.isCommand(msg.content, bot.config.command.symbol)) {
@@ -64,7 +85,6 @@ class EventHandler {
         const cmd = bot.commands[data.cmd]
         if (cmd) {
             if (typeof cmd === "function") {
-                console.log("Executing " + data.msg + " command.")
                 cmd(data);
             }
         }
@@ -73,14 +93,26 @@ class EventHandler {
         }
     }
 
-    executeCustom(data, bot) {
-        console.log("Executing custom command.")
-        console.log(data);
-        console.log(data.cmd);
-        if (data.details) {
-            console.log(data.details);
+    executeCustom(data) {
+        Commands.findOne({ guild: data.guild, command: data.cmd })
+            .then(err, command)
+        {
+            if (command) {
+                msg.channel.send(command.response);
+            }
+            else {
+                console.log('no command found')
+            }
         }
     }
+
+    // addCustomCommand(msg) {
+    //     Commands.findOne({ guild: data.guild, command: data.cmd })
+    //         .then(err, command)
+    //     {
+    //         
+    //     }
+    // }
 }
 
 
