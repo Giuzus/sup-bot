@@ -4,46 +4,47 @@ const logger = require('../logger.js');
 class EventHandler {
 
     init(bot) {
+
+        events = {
+            message: msg => {
+                if (msg.content && this.isCommand(msg.content, bot.config.command.symbol)) {
+    
+                    if (msg.author.id != bot.client.user.id) {
+                        logger.log(msg.guild ? msg.guild.name + ' ' : '' + msg.channel.name ? '#' + msg.channel.name + ' @' : 'PM @' + msg.author.username + ': ' + msg.content);
+                    }
+    
+                    var data = this.parseMsg(msg, bot.config.command.symbol);
+    
+                    bot.executeCommand(data);
+    
+                }
+            },
+    
+            ready: () => {
+                if (bot.online)
+                    logger.log('Reconnected.');
+                else
+                    logger.log('SupBot Online.');
+                bot.online = true;
+            },
+    
+            reconnecting: () => {
+                logger.log('Reconnecting...');
+            },
+    
+            disconnect: () => {
+                bot.online = false;
+                logger.log('Disconnected.');
+            },
+    
+            error: error => {
+                logger.error(error);
+            }
+        }
+
         for (var key in this.events) {
             var event = events[key];
             bot.client.on(key, event)
-        }
-    }
-
-    events = {
-        message: msg => {
-            if (msg.content && this.isCommand(msg.content, bot.config.command.symbol)) {
-
-                if (msg.author.id != bot.client.user.id) {
-                    logger.log(msg.guild ? msg.guild.name + ' ' : '' + msg.channel.name ? '#' + msg.channel.name + ' @' : 'PM @' + msg.author.username + ': ' + msg.content);
-                }
-
-                var data = this.parseMsg(msg, bot.config.command.symbol);
-
-                bot.executeCommand(data);
-
-            }
-        },
-
-        ready: () => {
-            if (bot.online)
-                logger.log('Reconnected.');
-            else
-                logger.log('SupBot Online.');
-            bot.online = true;
-        },
-
-        reconnecting: () => {
-            logger.log('Reconnecting...');
-        },
-
-        disconnect: () => {
-            bot.online = false;
-            logger.log('Disconnected.');
-        },
-
-        error: error => {
-            logger.error(error);
         }
     }
 
