@@ -8,18 +8,18 @@ class EventHandler {
         const events = {
             message: msg => {
                 if (msg.content && this.isCommand(msg.content, bot.config.command.symbol)) {
-    
+
                     if (msg.author.id != bot.client.user.id) {
                         logger.log(msg.guild ? msg.guild.name + ' ' : '' + msg.channel.name ? '#' + msg.channel.name + ' @' : 'PM @' + msg.author.username + ': ' + msg.content);
                     }
-    
+
                     var data = this.parseMsg(msg, bot.config.command.symbol);
-    
-                    this.executeCommand(data);
-    
+
+                    this.executeCommand(data, bot);
+
                 }
             },
-    
+
             ready: () => {
                 if (bot.online)
                     logger.log('Reconnected.');
@@ -27,16 +27,16 @@ class EventHandler {
                     logger.log('SupBot Online.');
                 bot.online = true;
             },
-    
+
             reconnecting: () => {
                 logger.log('Reconnecting...');
             },
-    
+
             disconnect: () => {
                 bot.online = false;
                 logger.log('Disconnected.');
             },
-    
+
             error: error => {
                 logger.error(error);
             }
