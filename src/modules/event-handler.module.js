@@ -23,9 +23,8 @@ var Commands = mongoose.model('Commands', commandSchema);
 class EventHandler {
 
     init(bot) {
-        bot.commands.addcommand = msg => {
-            msg.channel.send("ayy");
-        }
+        bot.commands.addcommand = this.addCustomCommand;
+        bot.commands.removecommand = this.removeCustomCommand;
 
         const events = {
             message: msg => {
@@ -38,7 +37,6 @@ class EventHandler {
                     var data = this.parseMsg(msg, bot.config.command.symbol);
 
                     this.executeCommand(data, bot);
-
                 }
             },
 
@@ -109,13 +107,52 @@ class EventHandler {
             });
     }
 
-    // addCustomCommand(msg) {
-    //     Commands.findOne({ guild: data.guild, command: data.cmd })
-    //         .then(err, command)
-    //     {
-    //         
-    //     }
-    // }
+    addCustomCommand(msg) {
+        Commands.findOne({ guild: data.guild, command: data.cmd },
+            function (err, command) {
+                if (command) {
+                    msg.channel.send("Command already exists.");
+                }
+                else {
+                    var cmd = msg.details.split(" ")[0];
+                    var message = msg.details.substring(msg.details.indexOf('"') + 1, a.lastIndexOf('"'));
+
+                    if (!cmd || !message) {
+                        msg.channel.send('Usage: <command-name> "<message>"')
+                    }
+
+                    var command = new Commands({
+                        guild: msg.guild.name,
+                        command: cmd,
+                        response: message
+                    });
+
+                    command.save(function (err, command) {
+                        msg.channel.send(`Successfully created '${command.cmd}' command.`)
+                    });
+                }
+            });
+    }
+
+    removeCustomCommand(msg) {
+        Commands.findOne({ guild: data.guild, command: data.cmd },
+            function (err, command) {
+                if (err)
+                    throw err;
+
+                if (command) {
+                    msg.channel.send("Command does not exist.");
+                }
+                else {
+                    command.remove(function (err, command) {
+                        if (err)
+                            throw err;
+
+                        msg.channel.send(`Removed command '${command.command}'.`);
+                    });
+                }
+            });
+    }
 }
 
 
