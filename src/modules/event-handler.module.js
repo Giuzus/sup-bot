@@ -5,7 +5,7 @@ class EventHandler {
 
     init(bot) {
 
-        events = {
+        const events = {
             message: msg => {
                 if (msg.content && this.isCommand(msg.content, bot.config.command.symbol)) {
     
@@ -42,7 +42,7 @@ class EventHandler {
             }
         }
 
-        for (var key in this.events) {
+        for (var key in events) {
             var event = events[key];
             bot.client.on(key, event)
         }
