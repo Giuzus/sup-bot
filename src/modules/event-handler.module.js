@@ -115,7 +115,7 @@ class EventHandler {
                 }
                 else {
                     var cmd = msg.details.split(" ")[0];
-                    var message = msg.details.substring(msg.details.indexOf('"') + 1, a.lastIndexOf('"'));
+                    var message = msg.details.substring(msg.details.indexOf('"') + 1, msg.details.lastIndexOf('"'));
 
                     if (!cmd || !message) {
                         msg.channel.send('Usage: <command-name> "<message>"')
