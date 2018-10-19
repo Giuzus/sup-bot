@@ -139,7 +139,7 @@ class EventHandler {
                 if (err)
                     throw err;
 
-                if (command) {
+                if (!command) {
                     msg.channel.send("Command does not exist.");
                 }
                 else {
