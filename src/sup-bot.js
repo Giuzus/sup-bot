@@ -25,6 +25,8 @@ class SupBot {
             }
         };
 
+        this.commands = {};
+
         this.dir = __dirname;
         this.client = new Discord.Client();
 
