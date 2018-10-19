@@ -61,7 +61,7 @@ class EventHandler {
     }
 
     executeCommand(data, bot) {
-        const cmd = bot.commands[data.msg]
+        const cmd = bot.commands[data.cmd]
         if (cmd) {
             if (typeof cmd === "function") {
                 console.log("Executing " + data.msg + " command.")
@@ -75,8 +75,11 @@ class EventHandler {
 
     executeCustom(data, bot) {
         console.log("Executing custom command.")
-        console.log(data.msg);
-        console.log(data.details);
+        console.log(data);
+        console.log(data.cmd);
+        if (data.details) {
+            console.log(data.details);
+        }
     }
 }
 
