@@ -134,7 +134,8 @@ class EventHandler {
     }
 
     removeCustomCommand(msg) {
-        Commands.findOne({ guild: msg.guild, command: msg.cmd },
+        var cmd = msg.details.split(" ")[0];
+        Commands.findOne({ guild: msg.guild, command: cmd },
             function (err, command) {
                 if (err)
                     throw err;
