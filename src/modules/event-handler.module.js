@@ -23,9 +23,10 @@ var Commands = mongoose.model('Commands', commandSchema);
 class EventHandler {
 
     init(bot) {
-        bot.commands = {
-
+        bot.commands.addcommand = msg => {
+            msg.channel.send("ayy");
         }
+
         const events = {
             message: msg => {
                 if (msg.content && this.isCommand(msg.content, bot.config.command.symbol)) {
