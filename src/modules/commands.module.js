@@ -26,7 +26,7 @@ class CommandsModule {
                     return;
                 }
 
-                for (cmd in commands) {
+                for (var cmd in commands) {
                     commandsString += cmd.command + '\n';
                 }
                 commandsString += '```'
