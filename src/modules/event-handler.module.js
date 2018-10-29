@@ -11,7 +11,7 @@ class EventHandler {
                 if (msg.content && this.isCommand(msg.content, bot.config.command.symbol)) {
 
                     if (msg.author.id != bot.client.user.id) {
-                        logger.log(msg.guild ? msg.guild.name + ' ' : '' + msg.channel.name ? '#' + msg.channel.name + ' @' : 'PM @' + msg.author.username + ': ' + msg.content);
+                        logger.log((msg.guild ? msg.guild.name + ' ' : '') + (msg.channel.name ? '#' + msg.channel.name + ' @' : 'PM @' + msg.author.username) + ': ' + msg.content);
                     }
 
                     var data = this.parseMsg(msg, bot.config.command.symbol);
