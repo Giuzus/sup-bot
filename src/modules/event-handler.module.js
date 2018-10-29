@@ -64,7 +64,6 @@ class EventHandler {
         const cmd = bot.commands[data.cmd]
         if (cmd) {
             if (typeof cmd === "function") {
-                console.log("Execute command");
                 cmd(data);
             }
         }
@@ -74,15 +73,10 @@ class EventHandler {
     }
 
     executeCustom(data) {
-        console.log("Execute custom command")
         Commands.findOne({ guild: data.guild, command: data.cmd },
             function (err, command) {
                 if (command) {
-                    console.log("Custom command found")
                     data.channel.send(command.response);
-                }
-                else {
-                    console.log('No custom command found')
                 }
             });
     }
