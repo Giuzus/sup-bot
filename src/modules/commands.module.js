@@ -27,11 +27,12 @@ class CommandsModule {
                 }
 
                 for (var cmd in commands) {
-                    commandsString += cmd.command + '\n';
+                    
+                    commandsString += JSON.stringify(cmd) + '\n';
                 }
                 commandsString += '```'
 
-                msg.channel.send(commandsString);
+                msg.author.send(commandsString);
             });
         }
     }

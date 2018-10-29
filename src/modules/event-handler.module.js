@@ -88,7 +88,9 @@ class EventHandler {
     }
 
     addCustomCommand(msg) {
-
+        if (!msg.channel) {
+            return;
+        }
         if (!msg.member.hasPermission("MANAGE_MESSAGES")) {
             msg.send(":octagonal_sign:, get some help.");
             return;
@@ -120,6 +122,9 @@ class EventHandler {
     }
 
     removeCustomCommand(msg) {
+        if (!msg.channel) {
+            return;
+        }
         if (!msg.member.hasPermission("MANAGE_MESSAGES")) {
             msg.send(":octagonal_sign:, get some help.");
             return;
