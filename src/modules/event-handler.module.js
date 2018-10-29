@@ -1,25 +1,5 @@
 const logger = require('../logger.js');
-var mongoose = require('mongoose');
-
-var Schema = mongoose.Schema;
-
-var commandSchema = new Schema({
-    guild: {
-        type: String,
-        required: true
-    },
-    command: {
-        type: String,
-        required: true
-    },
-    response: {
-        type: String,
-        required: true
-    }
-});
-
-var Commands = mongoose.model('Commands', commandSchema);
-
+const Commands = require('../mongo/commands')
 class EventHandler {
 
     init(bot) {
@@ -108,6 +88,12 @@ class EventHandler {
     }
 
     addCustomCommand(msg) {
+
+        if (!msg.member.hasPermission("MANAGE_MESSAGES")) {
+            msg.send(":octagonal_sign:, get some help.");
+            return;
+        }
+
         var cmd = msg.details.split(" ")[0];
         var message = msg.details.substring(msg.details.indexOf('"') + 1, msg.details.lastIndexOf('"'));
         Commands.findOne({ guild: msg.guild, command: cmd },
@@ -134,6 +120,11 @@ class EventHandler {
     }
 
     removeCustomCommand(msg) {
+        if (!msg.member.hasPermission("MANAGE_MESSAGES")) {
+            msg.send(":octagonal_sign:, get some help.");
+            return;
+        }
+
         var cmd = msg.details.split(" ")[0];
         Commands.findOne({ guild: msg.guild, command: cmd },
             function (err, command) {
