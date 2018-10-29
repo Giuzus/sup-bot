@@ -19,7 +19,7 @@ class CommandsModule {
             for (var key in bot.commands) {
                 commandsString += key + '\n';
             }
-            commandsString += '```\n **Custom commands:** \n ```'
+            commandsString += '```\n **Custom commands for ' + msg.guild + ':** \n ```'
             Commands.find({ guild: msg.guild }, (err, commands) => {
                 if (err) {
                     logger.error(err);
