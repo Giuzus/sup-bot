@@ -14,7 +14,7 @@ class CommandsModule {
             msg.channel.send(random(phrases));
         }
 
-        bot.commands.list = msg => {
+        bot.commands.commands = msg => {
             var commandsString = '**Commands:** \n ```';
             for (var key in bot.commands) {
                 commandsString += key + '\n';
@@ -26,10 +26,9 @@ class CommandsModule {
                     return;
                 }
 
-                for (var cmd in commands) {
-                    
-                    commandsString += JSON.stringify(cmd) + '\n';
-                }
+                commands.forEach(cmd => {
+                    commandsString += JSON.stringify(cmd.command) + '\n';
+                });
                 commandsString += '```'
 
                 msg.author.send(commandsString);
